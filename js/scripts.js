@@ -18,11 +18,26 @@ var quiz = {
     ]
 }
 
-var score = 0 // initialize score
+/// DOM References
+var $question = document.getElementById('question');
+var $score = document.getElementById('score');
+var $feedback = document.getElementById('feedback');
+
+/// view functions
+function update(element,content,klass){
+    var p = element.firstChild || document.createElement('p');
+    p.textContent = content;
+    element.appendChild(p);
+    if(klass){
+        p.className = klass;
+    }
+}
 
 play(quiz);
 
 function play(quiz){
+    var score = 0; // initialize score
+    update($score,score);
     // main game loop
    for(var i = 0, question, answer, max = quiz.questions.length; i<max; i++){
        question=quiz.questions[i].question;
@@ -33,22 +48,24 @@ function play(quiz){
     gameOver();
     
     function ask(question){
+        update($question,quiz.question + question);
         return prompt(quiz.question + question);
     }
 
     function check(answer){
         if(answer === quiz.questions[i].answer){
+            update($feedback,'Correct!','right');
             //if(answer === quiz[i][1]){ // quiz[i][1] is the ith answer
-            alert("Correct!");
             //increase score by 1
             score++;
+            update($score,score);
         }else{
-            alert("Wrong!");
+            update($feedback,'Wrong!','wrong');
         }
     }
     function gameOver(){
         // inform the player that the game 
         // has finished and tell them how many points they have
-        alert("Game Over, you scored "+score+" points");
+        update($question,'Game Over, you scored '+score+' points');
     }
 }

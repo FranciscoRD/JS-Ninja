@@ -22,6 +22,7 @@ var quiz = {
 var $question = document.getElementById('question');
 var $score = document.getElementById('score');
 var $feedback = document.getElementById('feedback');
+var $start = document.getElementById("start");
 
 /// view functions
 function update(element,content,klass){
@@ -32,8 +33,8 @@ function update(element,content,klass){
         p.className = klass;
     }
 }
-
-play(quiz);
+//  Button Start Event Listeners
+$start.addEventListener("click",function(){play(quiz)},false);
 
 function play(quiz){
     var score = 0; // initialize score

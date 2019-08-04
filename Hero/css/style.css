@@ -1,0 +1,7 @@
+label.break, button{
+    display: block;
+}
+.error{
+    background: #f99;
+    border: #900 1px solid;
+}
